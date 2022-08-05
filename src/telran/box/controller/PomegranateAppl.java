@@ -13,17 +13,30 @@ public class PomegranateAppl {
 
 
         List<Box> boxes = generateBoxes();
+        System.out.println(totalSeeds(boxes));
 
+        for (Box box : boxes) {
+            System.out.println(box);
 
-        System.out.println(boxes.get(11));
+        }
+
 
 
 
     }
 
+    private static int totalSeeds(List<Box> boxes){
+        return  boxes.stream()
+                .map(Box::getPomegranates)
+                .flatMap(pomegranates -> pomegranates.stream())
+                .map(Pomegranate::getSeeds)
+                .map(x -> x.size())
+                .reduce(0, (a,b) -> a + b);
+
+    }
 
     private static  List<Box> generateBoxes(){
-        int numberOfBoxes = randomGenerator(100, 200);
+        int numberOfBoxes = randomGenerator(5, 5);
         List<Box> list = new ArrayList<>();
         for (int i = 0; i < numberOfBoxes; i++) {
             list.add(new Box("Box" + i, generatePomegranates()));
@@ -33,7 +46,7 @@ public class PomegranateAppl {
 
 
     private static  List<Pomegranate> generatePomegranates(){
-        int numberOfPomegranates = randomGenerator(10, 20);
+        int numberOfPomegranates = randomGenerator(5, 5);
         List<Pomegranate> list = new ArrayList<>();
         for (int i = 0; i < numberOfPomegranates; i++) {
             list.add(new Pomegranate(generateSeeds()));
@@ -42,7 +55,7 @@ public class PomegranateAppl {
     }
 
     private static  List<Seed> generateSeeds(){
-        int numberOfSeeds = randomGenerator(400, 700);
+        int numberOfSeeds = randomGenerator(5, 5);
         List<Seed> list = new ArrayList<>();
         for (int i = 0; i < numberOfSeeds; i++) {
              list.add(new Seed());

@@ -21,6 +21,9 @@ public class Box implements Iterable<Pomegranate>{
         return name;
     }
 
+    public List<Pomegranate> getPomegranates() {
+        return pomegranates;
+    }
 
     @Override
     public String toString() {
