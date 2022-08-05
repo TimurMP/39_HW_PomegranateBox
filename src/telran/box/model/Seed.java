@@ -1,10 +1,10 @@
 package telran.box.model;
 
 public class Seed {
-    double weight;
+    double weight = 2;
 
-    public Seed(double weight) {
-        this.weight = weight;
+    public Seed() {
+
     }
 
     public double getWeight() {

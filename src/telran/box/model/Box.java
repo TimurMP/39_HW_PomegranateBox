@@ -21,9 +21,6 @@ public class Box implements Iterable<Pomegranate>{
         return name;
     }
 
-    public List<Pomegranate> getPomegranates() {
-        return pomegranates;
-    }
 
     @Override
     public String toString() {
@@ -35,6 +32,21 @@ public class Box implements Iterable<Pomegranate>{
 
     @Override
     public Iterator<Pomegranate> iterator() {
-        return null;
+        return new Iterator<Pomegranate>() {
+            int count = 0;
+
+
+            @Override
+            public boolean hasNext() {
+                return count < pomegranates.size();
+            }
+
+            @Override
+            public Pomegranate next() {
+                Pomegranate pomegranate = pomegranates.get(count);
+                count++;
+                return pomegranate;
+            }
+        };
     }
 }
