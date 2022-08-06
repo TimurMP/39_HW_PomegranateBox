@@ -6,6 +6,7 @@ import telran.box.model.Seed;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -30,25 +31,42 @@ public class PomegranateAppl {
     }
 
     private static int maxSeedsPerBox(List<Box> boxes){
-        for (Box box : boxes) {
-            int count = 0;
-            for (Pomegranate pomegranate : box) {
-                count += pomegranate.getSeeds().size();
-            }
-            System.out.println(count);
-        }
+//        for (Box box : boxes) {
+//            int count = 0;
+//            for (Pomegranate pomegranate : box) {
+//                count += pomegranate.getSeeds().size();
+//            }
+//            System.out.println(count);
+//        }
 
-        Iterable<Integer> max = boxes.stream()
-                .map(Box::getPomegranates)
-                .flatMap(pomegranates -> pomegranates.stream())
-                .map(x -> x.getSeeds().size())
-                .collect(Collectors.toList());
+        Map<Integer, List<Box>> maxlist  = boxes.stream()
+                        .flatMap(b->b.getPomegranates().stream())
+                                .map(s->s.getSeeds().size())
+                                        .collect(Collectors.groupingBy(s->s, Collectors.counting()));
+
+
+
 
         System.out.println();
-        for (Integer integer : max) {
-            System.out.println(integer);
 
-        }
+
+
+
+
+
+
+
+
+        System.out.println();
+
+
+
+
+
+
+
+
+
 
         return 0;
     }
