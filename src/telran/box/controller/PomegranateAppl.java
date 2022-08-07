@@ -6,9 +6,7 @@ import telran.box.model.Seed;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class PomegranateAppl {
     public static void main(String[] args) {
@@ -26,11 +24,9 @@ public class PomegranateAppl {
         maxSeedsPerBox(boxes);
 
 
-
-
     }
 
-    private static int maxSeedsPerBox(List<Box> boxes){
+    private static int maxSeedsPerBox(List<Box> boxes) {
 //        for (Box box : boxes) {
 //            int count = 0;
 //            for (Pomegranate pomegranate : box) {
@@ -39,48 +35,39 @@ public class PomegranateAppl {
 //            System.out.println(count);
 //        }
 
-        Map<Integer, List<Box>> maxlist  = boxes.stream()
-                        .flatMap(b->b.getPomegranates().stream())
-                                .map(s->s.getSeeds().size())
-                                        .collect(Collectors.groupingBy(s->s, Collectors.counting()));
+
+//        Map<Integer, List<Box>> nnn =
+//        boxes
+//                .stream()
+//                .flatMap(b -> b.getPomegranates().stream()
+//                                .flatMap(p->p.getSeedsSize())
+//
+//                        )
+//                        System.out.println();
 
 
 
-
-        System.out.println();
-
-
-
-
-
-
-
-
-
-        System.out.println();
-
-
-
-
-
-
-
-
+//
+//        Map<Integer, List<Box>> maxlist  = boxes.stream()
+//                .flatMap(b->b.getPomegranates().stream())
+//                .map(s->s.getSeeds().size())
+//                .collect(Collectors.groupingBy(s->s, Collectors.counting()));
 
 
         return 0;
     }
-    private static int totalSeeds(List<Box> boxes){
-        return  boxes.stream()
+
+    private static int totalSeeds(List<Box> boxes) {
+        return boxes.stream()
                 .map(Box::getPomegranates)
                 .flatMap(pomegranates -> pomegranates.stream())
                 .map(Pomegranate::getSeeds)
                 .map(x -> x.size())
-                .reduce(0, (a,b) -> a + b);
+                .reduce(0, (a, b) -> a + b);
 
     }
 
-    private static  List<Box> generateBoxes(){
+    private static List<Box> generateBoxes() {
         int numberOfBoxes = randomGenerator(1, 5);
         List<Box> list = new ArrayList<>();
         for (int i = 0; i < numberOfBoxes; i++) {
@@ -90,7 +77,7 @@ public class PomegranateAppl {
     }
 
 
-    private static  List<Pomegranate> generatePomegranates(){
+    private static List<Pomegranate> generatePomegranates() {
         int numberOfPomegranates = randomGenerator(1, 5);
         List<Pomegranate> list = new ArrayList<>();
         for (int i = 0; i < numberOfPomegranates; i++) {
@@ -99,21 +86,19 @@ public class PomegranateAppl {
         return list;
     }
 
-    private static  List<Seed> generateSeeds(){
+    private static List<Seed> generateSeeds() {
         int numberOfSeeds = randomGenerator(1, 3);
         List<Seed> list = new ArrayList<>();
         for (int i = 0; i < numberOfSeeds; i++) {
-             list.add(new Seed());
+            list.add(new Seed());
         }
         return list;
     }
 
-    private static int randomGenerator(int from, int to){
+    private static int randomGenerator(int from, int to) {
         Random random = new Random();
-        return random.nextInt((to + 1)-from)+from;
+        return random.nextInt((to + 1) - from) + from;
     }
-
-
 
 
 }
